@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - WEBHOOK_URL=https://smee.io/NEURAFLOWTESTE
+      - N8N_HOST=0.0.0.0
+      - N8N_PROTOCOL=http
+      - EXECUTIONS_MODE=regular          # ← Mudamos para regular (sem Redis)
+      - N8N_ENCRYPTION_KEY=neuraflowai2026
+      - TZ=America/Sao_Paulo
+      - DB_TYPE=sqlite
+      - N8N_SECURE_COOKIE=false
+    volumes:
+      - n8n_data:/home/node/.n8n
+
+volumes:
+  n8n_data:
